@@ -13,5 +13,19 @@ namespace Sheet2.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(float value, float rate, Int32 years)
+        {
+            ViewData["Value"] = value;
+            ViewData["Rate"] = rate;
+            ViewData["Years"] = years;
+
+            ViewData["SimpleAmount"] = (value * rate * years) / 100;
+            ViewData["CompoundAmount"] = value * Math.Pow(1 + (rate / 100), years);
+
+            return View();
+            
+        }
     }
 }
