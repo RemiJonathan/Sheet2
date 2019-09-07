@@ -17,6 +17,7 @@ namespace Sheet2.Controllers
         [HttpPost]
         public ActionResult Index(float value, float rate, Int32 years)
         {
+
             ViewData["Value"] = value;
             ViewData["Rate"] = rate;
             ViewData["Years"] = years;
