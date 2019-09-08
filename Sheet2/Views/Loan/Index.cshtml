@@ -6,9 +6,15 @@
 <h2>Simple/Monthly Compound Interest Investment</h2>
 
 <form method="post">
-    Initial Investment <input type="number" min="0" placeholder="1000.00" step="0.01" name="value" value="@ViewData["Value"]" required/><br />
-    Interest Rate <input type="number" min="0" placeholder="1.850" step="0.001" name="rate" value="@ViewData["Rate"]" required/><br />
-    Term of Investment <input type="number" min="0" placeholder="5" step="1" name="years" value="@ViewData["Years"]" required/><br />
+    @if (ViewData["ValueError"] != null)
+    {<span style="color:red;">@ViewData["ValueError"].ToString()</span>}
+    Initial Investment <input type="number" min="0" placeholder="1000.00" step="0.01" name="value" value="@ViewData["Value"]" required /><br />
+    @if (ViewData["RateError"] != null)
+    {<span style="color:red;">@ViewData["RateError"].ToString()</span>}
+    Interest Rate <input type="number" min="0" placeholder="1.850" step="0.001" name="rate" value="@ViewData["Rate"]" required /><br />
+    @if (ViewData["YearsError"] != null)
+    {<span style="color:red;">@ViewData["YearsError"].ToString()</span>}
+    Term of Investment <input type="number" min="0" placeholder="5" step="1" name="years" value="@ViewData["Years"]" required /><br />
     <br />
     <input type="submit" value="Invest!" />
 </form>
@@ -17,7 +23,7 @@
 {
 <h3>Given @ViewData["Years"] years, an investment of @Convert.ToDecimal(@ViewData["Value"]).ToString("C"),
     and an annual rate of %@ViewData["Rate"], you will have <strong>@Convert.ToDecimal(ViewData["SimpleAmount"]).ToString("C")</strong>
-    with simple  interest and <strong>@Convert.ToDecimal(ViewData["CompoundAmount"]).ToString("C")</strong> with compund interest.</h3>
+    with simple  interest and <strong>@Convert.ToDecimal(ViewData["CompoundAmount"]).ToString("C")</strong> with compound interest.</h3>
 }
 
 
