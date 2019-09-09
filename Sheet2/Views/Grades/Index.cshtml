@@ -3,6 +3,38 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Student Average Grade Calculator</h2>
+
+@{
+    Html.BeginForm("Index", "Grades", FormMethod.Post);
+    //Amount of grades to be entered
+    int gradesAmount = 3;
+    for (int i = 0; i < gradesAmount; i++)
+    {
+        int humanGradeIndex = i + 1;
+        <label for="grade_@i">Grade @humanGradeIndex: </label>
+        <input type="number" min="0" max="100" name="grade_@i" id="grade_@i" required />
+        <br />
+    }
+    <br />
+    <input type="submit" value="Calculate Average" />
+    Html.EndForm();
+    if (ViewData["NGrade"] != null)
+    {<span>Average : @ViewData["NGrade"] &nbsp;&nbsp;&nbsp;&nbsp;</span>}
+    if (ViewData["CGrade"] != null)
+    {
+        if (@ViewData["CGrade"].Equals("F") || @ViewData["CGrade"].Equals("D"))
+        {
+        <span style="color:red">@ViewData["CGrade"]</span>}
+        else if (@ViewData["CGrade"].Equals("C"))
+        {
+        <span style="color:yellow">@ViewData["CGrade"]</span>}
+        else if (@ViewData["CGrade"].Equals("B") || @ViewData["CGrade"].Equals("A"))
+        {
+        <span style="color:green">@ViewData["CGrade"]</span>}
+        }
+
+
+    }
 
 @Html.ActionLink("Back", "Index", "Home")
